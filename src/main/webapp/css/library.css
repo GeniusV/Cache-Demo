@@ -1,0 +1,13 @@
+
+.opacity-block{
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 10px;
+    background: white;
+    opacity: 0.96;
+}
+
+.bg-img{
+    background: url('/static/img/825217.jpg') no-repeat fixed top center;background-size: cover;
+}
