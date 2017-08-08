@@ -14,3 +14,8 @@ Make sure that the head of `web.xml` is correct, for example:
 ```
 
 It's remommended to config cache proptities in Realm beans, or cache may not works as expect.
+
+## Copyright and License
+Copyright 2017 GeniusV
+
+Code released under the MIT License.
