@@ -25,13 +25,44 @@
         </property>
     </bean>
 
+    <!--shiro filters start-->
+
     <bean id="login" class="io.github.geniusv.shiro.filter.LoginFilter"/>
 
+    <!--shio filters end-->
+
+    <!--shiro SecurityManager-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="customRelam"/>
         <property name="cacheManager" ref="jedisShiroCacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
+    <!--use shiro to manage session, stores in redis db1. start-->
+    <!--session configuration start-->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionValidationInterval" value="18000000"/>
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionDAO" ref="customShiroSessionDao"/>
+        <property name="sessionListeners" ref="customSessionListener"/>
+    </bean>
+
+    <bean id="customSessionListener" class="io.github.geniusv.shiro.listener.CustomSessionListener">
+        <property name="shiroSessionRespository" ref="defaultShiroSessionRespository"/>
+    </bean>
+
+    <bean id="customShiroSessionDao" class="io.github.geniusv.shiro.session.CustomShiroSessionDao">
+        <property name="shiroSessionRespository" ref="defaultShiroSessionRespository"/>
+        <property name="sessionIdGenerator" ref="javaUuidSessionIdGenerator"/>
+    </bean>
+
+    <bean id="javaUuidSessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <bean id="defaultShiroSessionRespository"
+          class="io.github.geniusv.shiro.session.impl.DefaultShiroSessionRespository">
+        <property name="jedisDao" ref="jedisDao"/>
+    </bean>
+    <!--session configuration start-->
 
     <bean id="customRelam" class="io.github.geniusv.shiro.realm.CustomRelam">
         <property name="cacheManager" ref="jedisShiroCacheManager"/>
@@ -40,6 +71,7 @@
         <property name="authorizationCachingEnabled" value="true"/>
     </bean>
 
+    <!--shiro cache configuration, use shiro db0-->
     <bean id="jedisShiroCacheManager" class="io.github.geniusv.shiro.cache.JedisShiroCacheManager">
         <property name="shiroJedisDao" ref="shiroJedisDao"/>
     </bean>

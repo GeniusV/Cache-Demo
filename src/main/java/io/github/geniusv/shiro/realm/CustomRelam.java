@@ -28,6 +28,9 @@ public class CustomRelam extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username = (String) authenticationToken.getPrincipal();
         User user = userService.selectByUserName(username);
+        if (user == null) {
+            throw new AuthenticationException();
+        }
         long id = user.getId();
         String password = user.getPassword();
         AuthenticationInfo info =  new SimpleAuthenticationInfo(id, password, this.getName());

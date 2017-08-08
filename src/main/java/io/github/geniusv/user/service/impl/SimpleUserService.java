@@ -6,7 +6,6 @@ import io.github.geniusv.dao.model.UserExample;
 import io.github.geniusv.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,8 +33,11 @@ public class SimpleUserService implements UserService {
         example.or().andUserNameEqualTo(userName);
 
         List<User> list = userMapper.selectByExample(example);
-
-        return list.get(0);
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list.get(0);
+        }
     }
 
     @Override

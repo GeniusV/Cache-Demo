@@ -2,8 +2,6 @@ package io.github.geniusv.controller;
 
 import io.github.geniusv.dao.model.User;
 import io.github.geniusv.user.service.UserService;
-import io.github.geniusv.util.LoggerUtil;
-import javafx.scene.shape.VLineTo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -41,13 +39,13 @@ public class UserController {
 
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 
+
         Subject subject = SecurityUtils.getSubject();
 
 
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-            LoggerUtil.error(getClass(), "login ",e);
             data.put("error", "User name or password error.");
         }
 
