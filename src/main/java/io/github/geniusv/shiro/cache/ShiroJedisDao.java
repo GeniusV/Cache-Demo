@@ -70,7 +70,7 @@ public class ShiroJedisDao {
             jedis = getJedis();
 
             Long result = jedis.del(key);
-            LoggerUtil.formatDebug(getClass(), "删除Session结果：%s", result);
+            LoggerUtil.debug(getClass(), "删除Session结果：%s", result);
         } catch (Exception e) {
             isBroken = true;
             throw e;

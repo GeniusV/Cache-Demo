@@ -30,14 +30,14 @@ public class JedisShiroCache<k, v> implements Cache<k, v> {
         }
         v result = (v) SerializeUtil.unserialize(byteValue);
         if (result != null) {
-            LoggerUtil.formatDebug(getClass(), "shiro getting cache: getAllKeys: %s, value: %s", key.toString(), result.toString());
+            LoggerUtil.debug(getClass(), "shiro getting cache: getAllKeys: %s, value: %s", key.toString(), result.toString());
         }
         return result;
     }
 
     @Override
     public v put(k key, v value) throws CacheException {
-        LoggerUtil.formatDebug(getClass(), "shiro putting cache: getAllKeys: %s, value: %s", key.toString(), value.toString());
+        LoggerUtil.debug(getClass(), "shiro putting cache: getAllKeys: %s, value: %s", key.toString(), value.toString());
         v previous = get(key);
         try {
             dao.saveValueByKey(SerializeUtil.serialize(key), SerializeUtil.serialize(value), -1);
@@ -49,7 +49,7 @@ public class JedisShiroCache<k, v> implements Cache<k, v> {
 
     @Override
     public v remove(k key) throws CacheException {
-        LoggerUtil.formatDebug(getClass(), "shiro deleting cache: getAllKeys: %s", key.toString());
+        LoggerUtil.debug(getClass(), "shiro deleting cache: getAllKeys: %s", key.toString());
         v previous = get(key);
         try {
             dao.deleteByKey(SerializeUtil.serialize(key));

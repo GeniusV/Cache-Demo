@@ -36,7 +36,7 @@ public class DefaultShiroSessionRespository implements ShiroSessionRespository {
             Long sessionTimeOut = session.getTimeout() / 1000 + 60;
             jedisDao.saveValueByKey(key, value, sessionTimeOut.intValue());
         } catch (Exception e) {
-            LoggerUtil.formatError(getClass(), e, "save session error£¬id:[%s]", session.getId());
+            LoggerUtil.error(getClass(), e, "save session error, id:[%s]", session.getId());
         }
     }
 
@@ -48,7 +48,7 @@ public class DefaultShiroSessionRespository implements ShiroSessionRespository {
         try {
             jedisDao.deleteByKey(SerializeUtil.serialize(sessionId));
         } catch (Exception e) {
-            LoggerUtil.formatError(getClass(), e, "delete session throw exception: id:[%s]]", sessionId);
+            LoggerUtil.error(getClass(), e, "delete session throw exception: id:[%s]]", sessionId);
         }
     }
 
@@ -62,7 +62,7 @@ public class DefaultShiroSessionRespository implements ShiroSessionRespository {
             byte[] value = jedisDao.getValueByKey(SerializeUtil.serialize(sessionId));
             result = (Session) SerializeUtil.unserialize(value);
         } catch (Exception e) {
-            LoggerUtil.formatError(getClass(), e, "get session throw exception: id:[%s]", sessionId);
+            LoggerUtil.error(getClass(), e, "get session throw exception: id:[%s]", sessionId);
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class DefaultShiroSessionRespository implements ShiroSessionRespository {
                 result.add((Session) SerializeUtil.unserialize(item));
             }
         } catch (Exception e) {
-            LoggerUtil.formatError(getClass(), e, "get all session throw exception");
+            LoggerUtil.error(getClass(), e, "get all session throw exception");
         }
         return result;
     }

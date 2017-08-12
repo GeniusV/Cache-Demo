@@ -15,18 +15,18 @@ public class CustomSessionListener implements SessionListener {
 
     @Override
     public void onStart(Session session) {
-        LoggerUtil.formatDebug(getClass(), "a session start: session id:[%s]", session.getId().toString());
+        LoggerUtil.debug(getClass(), "a session start: session id:[%s]", session.getId().toString());
     }
 
     @Override
     public void onStop(Session session) {
-        LoggerUtil.formatDebug(getClass(), "a session stop: session id:[%s]", session.getId().toString());
+        LoggerUtil.debug(getClass(), "a session stop: session id:[%s]", session.getId().toString());
     }
 
     @Override
     public void onExpiration(Session session) {
         shiroSessionRespository.deleteSession(session.getId());
-        LoggerUtil.formatDebug(getClass(), "a session expire: session id:[%s]", session.getId().toString());
+        LoggerUtil.debug(getClass(), "a session expire: session id:[%s]", session.getId().toString());
     }
 
     public ShiroSessionRespository getShiroSessionRespository() {

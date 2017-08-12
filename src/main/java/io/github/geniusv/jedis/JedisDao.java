@@ -48,15 +48,6 @@ public class JedisDao {
     public void returnResource(Jedis jedis, boolean isBroken) {
         if (jedis == null)
             return;
-        /**
-         * @deprecated starting from Jedis 3.0 this method will not be exposed.
-         * Resource cleanup should be done using @see {@link redis.clients.jedis.Jedis#close()}
-        if (isBroken){
-        getJedisPool().returnBrokenResource(jedis);
-        }else{
-        getJedisPool().returnResource(jedis);
-        }
-         */
         jedis.close();
     }
 
@@ -66,7 +57,6 @@ public class JedisDao {
         boolean isBroken = false;
         try {
             jedis = getJedis();
-
             result = jedis.get(key);
         } catch (Exception e) {
             isBroken = true;
@@ -82,9 +72,7 @@ public class JedisDao {
         boolean isBroken = false;
         try {
             jedis = getJedis();
-
-            Long result = jedis.del(key);
-            LoggerUtil.formatDebug(getClass(), "É¾³ýSession½á¹û£º%s", result);
+            jedis.del(key);
         } catch (Exception e) {
             isBroken = true;
             throw e;
@@ -139,4 +127,5 @@ public class JedisDao {
         }
         return result;
     }
+
 }
