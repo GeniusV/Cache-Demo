@@ -1,6 +1,5 @@
 package dao;
 
-import org.apache.log4j.spi.LoggerFactory;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.*;
@@ -27,7 +26,7 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         select.addAttribute(new Attribute("id", "selectPrimaryKeyByExample"));
         select.addAttribute(new Attribute("resultType", introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString()));
         select.addAttribute(new Attribute("parameterType", introspectedTable.getExampleType()));
-        select.addElement(new TextElement("select "+ introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() +" from " + introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime()));
+        select.addElement(new TextElement("select " + introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() + " from " + introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime()));
 
 //        example
         XmlElement ifElement = new XmlElement("if");
@@ -57,7 +56,7 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
 
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        FullyQualifiedJavaType returnType = new FullyQualifiedJavaType("java.util.List<"+introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType()+">");
+        FullyQualifiedJavaType returnType = new FullyQualifiedJavaType("java.util.List<" + introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType() + ">");
         Method method = generateMethod("selectPrimaryKeyByExample", JavaVisibility.DEFAULT, returnType, new Parameter(new FullyQualifiedJavaType(introspectedTable.getExampleType()), "example"));
         interfaze.addMethod(method);
         interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
@@ -65,12 +64,12 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         return true;
     }
 
-    public static Method generateMethod(String methodName, JavaVisibility visibility, FullyQualifiedJavaType returnType, Parameter ... parameters){
+    public static Method generateMethod(String methodName, JavaVisibility visibility, FullyQualifiedJavaType returnType, Parameter... parameters) {
         Method method = new Method(methodName);
         method.setVisibility(visibility);
         method.setReturnType(returnType);
-        if (parameters != null){
-            for (Parameter parameter: parameters) {
+        if (parameters != null) {
+            for (Parameter parameter : parameters) {
                 method.addParameter(parameter);
             }
         }

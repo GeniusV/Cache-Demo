@@ -6,6 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,6 +74,12 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "redirect:/login";
+    }
+
+    @RequiresRoles("admin")
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPage() {
+        return "admin";
     }
 
 }

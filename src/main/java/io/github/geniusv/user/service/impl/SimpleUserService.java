@@ -1,6 +1,8 @@
 package io.github.geniusv.user.service.impl;
 
+import io.github.geniusv.dao.mapper.RoleMapper;
 import io.github.geniusv.dao.mapper.UserMapper;
+import io.github.geniusv.dao.mapper.UserRoleMapper;
 import io.github.geniusv.dao.model.User;
 import io.github.geniusv.dao.model.UserExample;
 import io.github.geniusv.user.service.UserService;
@@ -11,7 +13,6 @@ import java.util.List;
 
 /**
  * Created by GeniusV on 8/5/17.
- *
  */
 
 
@@ -21,10 +22,11 @@ public class SimpleUserService implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public int insert(User record) {
-        return 0;
-    }
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
+    @Autowired
+    private RoleMapper roleMapper;
 
     public User getUserById(long id) {
         return userMapper.selectByPrimaryKey(id);
@@ -44,8 +46,10 @@ public class SimpleUserService implements UserService {
 
     @Override
     public void addUser(User user) {
-
+        userMapper.insert(user);
     }
+
+
 }
 
 

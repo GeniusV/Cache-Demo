@@ -11,6 +11,9 @@
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
+    <context:component-scan base-package="io.github.geniusv.dao"/>
+    <context:component-scan base-package="io.github.geniusv.user"/>
+    <context:component-scan base-package="io.github.geniusv.role"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>

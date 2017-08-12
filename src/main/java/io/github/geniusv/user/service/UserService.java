@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface UserService {
-    int insert(User record);
 
     User selectByUserName(String userName);
 
     User getUserById(long id);
 
     void addUser(User user);
+
 
 }
