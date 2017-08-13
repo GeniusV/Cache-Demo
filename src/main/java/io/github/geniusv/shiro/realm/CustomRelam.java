@@ -14,9 +14,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by GeniusV on 8/4/17.
@@ -37,10 +37,7 @@ public class CustomRelam extends AuthorizingRealm {
         if (roleList == null) {
             return null;
         }
-        Set<String> roles = new HashSet<>();
-        for (Role role : roleList) {
-            roles.add(role.getName());
-        }
+        Set<String> roles = roleList.stream().map(Role::getName).collect(Collectors.toSet());
         authorizationInfo.setRoles(roles);
         return authorizationInfo;
     }

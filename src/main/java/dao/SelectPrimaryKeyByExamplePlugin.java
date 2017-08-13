@@ -22,13 +22,29 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
 
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
+//      <select id="selectPrimaryKeyByExample" parameterType="dao.model.RoleExample" resultType="java.lang.Long">
         XmlElement select = new XmlElement("select");
         select.addAttribute(new Attribute("id", "selectPrimaryKeyByExample"));
         select.addAttribute(new Attribute("resultType", introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString()));
         select.addAttribute(new Attribute("parameterType", introspectedTable.getExampleType()));
-        select.addElement(new TextElement("select " + introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() + " from " + introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime()));
 
-//        example
+//        select
+        select.addElement(new TextElement("select"));
+
+//        <if test = "distinct" >
+//        distinct
+//        </if>
+        XmlElement ifDinstinct = new XmlElement("if");
+        ifDinstinct.addAttribute(new Attribute("test", "distinct != null"));
+        ifDinstinct.addElement(new TextElement("distinct"));
+        select.addElement(ifDinstinct);
+
+//      id from v_role
+        select.addElement(new TextElement(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() + " from " + introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime()));
+
+//        <if test = "_parameter != null" >
+//        <include refid = "Example_Where_Clause" / >
+//        </if>
         XmlElement ifElement = new XmlElement("if");
         ifElement.addAttribute(new Attribute("test", "_parameter != null"));
         XmlElement includeElement = new XmlElement("include");
@@ -37,18 +53,27 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         ifElement.addElement(includeElement);
         select.addElement(ifElement);
 
+//        <if test="orderByClause != null">
+//        order by ${orderByClause}
+//        </if>
         ifElement = new XmlElement("if");
         ifElement.addAttribute(new Attribute("test", "orderByClause != null"));  //$NON-NLS-2$
         ifElement.addElement(new TextElement("order by ${orderByClause}"));
         select.addElement(ifElement);
 
+//         <cache type="org.mybatis.caches.redis.RedisCache" />
         XmlElement cacheElement = new XmlElement("cache");
         cacheElement.addAttribute(new Attribute("type", "org.mybatis.caches.redis.RedisCache"));
 
-        XmlElement parentElement = document.getRootElement();
+//        selectPrimaryKeyLimitedByExample
+        XmlElement selectPrimaryKeyLimitedByExample = generateSelectLimitedPrimaryKeyByExample(introspectedTable);
 
+
+        //add all elements
+        XmlElement parentElement = document.getRootElement();
         parentElement.addElement(select);
         parentElement.addElement(cacheElement);
+        parentElement.addElement(selectPrimaryKeyLimitedByExample);
 
 
         return super.sqlMapDocumentGenerated(document, introspectedTable);
@@ -56,10 +81,26 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
 
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        // add selectPrimaryKeyByExample
         FullyQualifiedJavaType returnType = new FullyQualifiedJavaType("java.util.List<" + introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType() + ">");
         Method method = generateMethod("selectPrimaryKeyByExample", JavaVisibility.DEFAULT, returnType, new Parameter(new FullyQualifiedJavaType(introspectedTable.getExampleType()), "example"));
         interfaze.addMethod(method);
-        interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
+
+//        selectPrimaryKeyLimitedByExample
+        Method selectPrimaryKeyLimitedByExample = new Method();
+        selectPrimaryKeyLimitedByExample.setName("selectPrimaryKeyLimitedByExample");
+        selectPrimaryKeyLimitedByExample.setVisibility(JavaVisibility.DEFAULT);
+        selectPrimaryKeyLimitedByExample.setReturnType(returnType);
+        Parameter offset = new Parameter(new FullyQualifiedJavaType("Long"), "offset", "@Param(\"offset\")");
+        Parameter num = new Parameter(new FullyQualifiedJavaType("Long"), "num", "@Param(\"num\")");
+        Parameter example = new Parameter(new FullyQualifiedJavaType(introspectedTable.getExampleType()), "example", "@Param(\"example\")");
+        selectPrimaryKeyLimitedByExample.addParameter(offset);
+        selectPrimaryKeyLimitedByExample.addParameter(num);
+        selectPrimaryKeyLimitedByExample.addParameter(example);
+        interfaze.addMethod(selectPrimaryKeyLimitedByExample);
+
+                //add @Repository
+                interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
         interfaze.addAnnotation("@Repository");
         return true;
     }
@@ -75,6 +116,57 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         }
 
         return method;
+    }
+
+    public XmlElement generateSelectLimitedPrimaryKeyByExample(IntrospectedTable introspectedTable) {
+//          <select id="selectPrimaryKeyLimitedByExample" parameterType="map" resultType="java.lang.Long">
+        XmlElement select = new XmlElement("select");
+        select.addAttribute(new Attribute("id", "selectPrimaryKeyLimitedByExample"));
+        select.addAttribute(new Attribute("parameterType", "map"));
+        select.addAttribute(new Attribute("resultType", introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString()));
+
+        //        select
+        select.addElement(new TextElement("select"));
+
+//          <if test="example.distinct != null">
+//          distinct
+//           </if>
+        XmlElement ifDinstinct = new XmlElement("if");
+        ifDinstinct.addAttribute(new Attribute("test", "example.distinct != null"));
+        ifDinstinct.addElement(new TextElement("distinct"));
+        select.addElement(ifDinstinct);
+
+//      id from v_role
+        select.addElement(new TextElement(introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() + " from " + introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime()));
+
+//    <if test="_parameter != null">
+//      <include refid="Update_By_Example_Where_Clause" />
+//    </if>
+        XmlElement ifElement = new XmlElement("if");
+        ifElement.addAttribute(new Attribute("test", "_parameter != null"));
+        XmlElement includeElement = new XmlElement("include");
+        includeElement.addAttribute(new Attribute("refid",
+                introspectedTable.getMyBatis3UpdateByExampleWhereClauseId()));
+        ifElement.addElement(includeElement);
+        select.addElement(ifElement);
+
+//    <if test="example.orderByClause != null">
+//                order by ${example.orderByClause}
+//    </if>
+        ifElement = new XmlElement("if");
+        ifElement.addAttribute(new Attribute("test", "example.orderByClause != null"));  //$NON-NLS-2$
+        ifElement.addElement(new TextElement("order by ${example.orderByClause}"));
+        select.addElement(ifElement);
+
+//    <if test="offset != null and num != null">
+//                limit #{offset}, #{num}
+//    </if>
+        ifElement = new XmlElement("if");
+        ifElement.addAttribute(new Attribute("test", "offset != null and num != null"));  //$NON-NLS-2$
+        ifElement.addElement(new TextElement("limit #{offset}, #{num}"));
+        select.addElement(ifElement);
+
+        return select;
     }
 
 

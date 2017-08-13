@@ -1,7 +1,5 @@
 package io.github.geniusv.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.geniusv.dao.model.User;
 import io.github.geniusv.user.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -42,9 +40,7 @@ public class UserController {
 
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 
-
         Subject subject = SecurityUtils.getSubject();
-
 
         try {
             subject.login(token);
@@ -78,14 +74,5 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @RequiresRoles("admin")
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminPage() {
-        return "admin";
-    }
 
-    @ExceptionHandler(value = {UnauthenticatedException.class, UnauthorizedException.class})
-    public String exceptionHandler(HttpServletRequest request) {
-        return "redirect:/404";
-    }
 }

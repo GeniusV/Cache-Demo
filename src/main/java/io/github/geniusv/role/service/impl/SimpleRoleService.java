@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Copyright 2017 GeniusV
@@ -62,17 +63,17 @@ public class SimpleRoleService implements RoleService {
 
     @Override
     public List<Role> getUserRolesById(Long userId) {
-        List<Role> result = new ArrayList<>();
+        List<Role> result = null;
         UserRoleExample userRoleExample = new UserRoleExample();
         userRoleExample.or().andUserIdEqualTo(userId);
         List<UserRole> userRoleList = userRoleMapper.selectByExample(userRoleExample);
         if (userRoleList == null || userRoleList.isEmpty()) {
             return null;
         }
-        List<Long> roleIdList = new ArrayList<>();
-        for (UserRole userRole : userRoleList) {
-            roleIdList.add(userRole.getRoleId());
-        }
+
+        // get roleId in each Userole and put them into the roleIdList
+        List<Long> roleIdList = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());
+
         RoleExample roleExample = new RoleExample();
         roleExample.or().andIdIn(roleIdList);
         result = roleMapper.selectByExample(roleExample);
