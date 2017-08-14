@@ -49,7 +49,7 @@ public final class RedisCache implements Cache {
 
     }
 
-    // TODO Review this is UNUSED
+
     private Object execute(RedisCallback callback) {
         Jedis jedis = pool.getResource();
         try {
@@ -81,7 +81,7 @@ public final class RedisCache implements Cache {
             @Override
             public Object doWithRedis(Jedis jedis) {
                 jedis.hset(id.getBytes(), key.toString().getBytes(), SerializeUtil.serialize(value));
-                LoggerUtil.debug(getClass(), ">>>>cache put object key: " + key.toString());
+                LoggerUtil.debug(getClass(), ">>>>cache put object key: " + key.toString().replace('\n',' ').trim());
                 return null;
             }
         });
@@ -93,7 +93,7 @@ public final class RedisCache implements Cache {
         return execute(new RedisCallback() {
             @Override
             public Object doWithRedis(Jedis jedis) {
-                LoggerUtil.debug(getClass(), ">>>>cache get object key: " + key.toString());
+                LoggerUtil.debug(getClass(), ">>>>cache get object key: " + key.toString().replace('\n',' ').trim());
                 return SerializeUtil.unserialize(jedis.hget(id.getBytes(), key.toString().getBytes()));
             }
         });

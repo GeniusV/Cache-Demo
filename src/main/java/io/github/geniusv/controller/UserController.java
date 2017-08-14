@@ -73,6 +73,4 @@ public class UserController {
         subject.logout();
         return "redirect:/login";
     }
-
-
 }

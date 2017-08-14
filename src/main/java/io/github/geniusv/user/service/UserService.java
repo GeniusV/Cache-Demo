@@ -3,6 +3,8 @@ package io.github.geniusv.user.service;
 import io.github.geniusv.dao.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by GeniusV on 8/5/17.
  */
@@ -17,5 +19,7 @@ public interface UserService {
 
     void addUser(User user);
 
+    List<User> getAllUsersByPage(Long offset, Long num);
 
+    Long getUserCount();
 }

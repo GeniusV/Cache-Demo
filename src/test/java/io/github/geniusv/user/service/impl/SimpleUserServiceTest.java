@@ -57,5 +57,10 @@ public class SimpleUserServiceTest {
 //        Assert.assertEquals("admin", userService.selectByUserName("admin").getUserName());
     }
 
+    @Test
+    public void testGetAllUsersByPage() {
+        userService.getAllUsersByPage(0L, 10L).forEach(user -> System.out.println(user.getUserName()));
+    }
+
 
 }

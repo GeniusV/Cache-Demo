@@ -65,6 +65,7 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         XmlElement cacheElement = new XmlElement("cache");
         cacheElement.addAttribute(new Attribute("type", "org.mybatis.caches.redis.RedisCache"));
 
+
 //        selectPrimaryKeyLimitedByExample
         XmlElement selectPrimaryKeyLimitedByExample = generateSelectLimitedPrimaryKeyByExample(introspectedTable);
 

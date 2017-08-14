@@ -49,6 +49,22 @@ public class SimpleUserService implements UserService {
         userMapper.insert(user);
     }
 
+    @Override
+    public List<User> getAllUsersByPage(Long offset, Long num) {
+        UserExample example = new UserExample();
+        example.setOrderByClause("id");
+        List<Long> idList = userMapper.selectPrimaryKeyLimitedByExample(offset, num, example);
+
+        example = new UserExample();
+        example.or().andIdIn(idList);
+        return userMapper.selectByExample(example);
+    }
+
+    @Override
+    public Long getUserCount() {
+        return userMapper.countByExample(new UserExample());
+    }
+
 
 }
 
