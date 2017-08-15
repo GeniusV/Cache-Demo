@@ -5,18 +5,20 @@ import io.github.geniusv.user.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.UnauthenticatedException;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresGuest;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * Created by GeniusV on 8/4/17.
@@ -35,10 +37,12 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> login(@ModelAttribute("userName") String userName, @ModelAttribute("password") String password) {
+    public Map<String, Object> login(@ModelAttribute("userName") String userName, @ModelAttribute("password") String password, @ModelAttribute("rememberMe") boolean rememberMe) {
+
         Map<String, Object> data = new HashMap<String, Object>();
 
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        token.setRememberMe(rememberMe);
 
         Subject subject = SecurityUtils.getSubject();
 
@@ -58,6 +62,7 @@ public class UserController {
     public Map<String, Object> getCurrentUser() {
         Map<String, Object> data = new HashMap<String, Object>();
         Subject subject = SecurityUtils.getSubject();
+
         if (subject.isAuthenticated()) {
             Long id = (Long) subject.getPrincipal();
             User user = userService.getUserById(id);

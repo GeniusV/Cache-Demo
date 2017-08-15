@@ -15,6 +15,19 @@ import java.util.List;
  */
 public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
 
+    public static Method generateMethod(String methodName, JavaVisibility visibility, FullyQualifiedJavaType returnType, Parameter... parameters) {
+        Method method = new Method(methodName);
+        method.setVisibility(visibility);
+        method.setReturnType(returnType);
+        if (parameters != null) {
+            for (Parameter parameter : parameters) {
+                method.addParameter(parameter);
+            }
+        }
+
+        return method;
+    }
+
     @Override
     public boolean validate(List<String> list) {
         return true;
@@ -100,23 +113,10 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         selectPrimaryKeyLimitedByExample.addParameter(example);
         interfaze.addMethod(selectPrimaryKeyLimitedByExample);
 
-                //add @Repository
-                interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
+        //add @Repository
+        interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
         interfaze.addAnnotation("@Repository");
         return true;
-    }
-
-    public static Method generateMethod(String methodName, JavaVisibility visibility, FullyQualifiedJavaType returnType, Parameter... parameters) {
-        Method method = new Method(methodName);
-        method.setVisibility(visibility);
-        method.setReturnType(returnType);
-        if (parameters != null) {
-            for (Parameter parameter : parameters) {
-                method.addParameter(parameter);
-            }
-        }
-
-        return method;
     }
 
     public XmlElement generateSelectLimitedPrimaryKeyByExample(IntrospectedTable introspectedTable) {

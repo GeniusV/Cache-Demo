@@ -4,7 +4,6 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.util.Destroyable;
-import redis.clients.jedis.JedisPool;
 
 /**
  * Created by GeniusV on 8/7/17.
@@ -21,9 +20,10 @@ public class JedisShiroCacheManager implements CacheManager, Destroyable {
         this.shiroJedisDao = shiroJedisDao;
     }
 
+
     @Override
     public <K, V> Cache<K, V> getCache(String s) throws CacheException {
-        return new JedisShiroCache(shiroJedisDao);
+        return new JedisShiroCache<>(shiroJedisDao);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package io.github.geniusv.shiro.session;
 
-import io.github.geniusv.jedis.JedisDao;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
@@ -39,7 +38,7 @@ public class CustomShiroSessionDao extends AbstractSessionDAO {
 
     @Override
     public void update(Session session) throws UnknownSessionException {
-            shiroSessionRespository.saveSession(session);
+        shiroSessionRespository.saveSession(session);
     }
 
     @Override

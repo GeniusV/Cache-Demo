@@ -21,16 +21,16 @@ public class JedisDao {
         return jedisPool;
     }
 
+    public void setJedisPool(JedisPool jedisPool) {
+        this.jedisPool = jedisPool;
+    }
+
     public int getDbIndex() {
         return dbIndex;
     }
 
     public void setDbIndex(int dbIndex) {
         this.dbIndex = dbIndex;
-    }
-
-    public void setJedisPool(JedisPool jedisPool) {
-        this.jedisPool = jedisPool;
     }
 
     public Jedis getJedis() {

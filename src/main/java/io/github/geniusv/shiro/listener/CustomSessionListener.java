@@ -2,7 +2,6 @@ package io.github.geniusv.shiro.listener;
 
 import io.github.geniusv.shiro.session.ShiroSessionRespository;
 import io.github.geniusv.util.LoggerUtil;
-import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
 

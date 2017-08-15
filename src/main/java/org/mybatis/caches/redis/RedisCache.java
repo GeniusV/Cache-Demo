@@ -30,11 +30,9 @@ import java.util.concurrent.locks.ReadWriteLock;
  */
 public final class RedisCache implements Cache {
 
-    private final ReadWriteLock readWriteLock = new DummyReadWriteLock();
-
-    private String id;
-
     private static JedisPool pool;
+    private final ReadWriteLock readWriteLock = new DummyReadWriteLock();
+    private String id;
 
     public RedisCache(final String id) {
         if (id == null) {
@@ -81,7 +79,7 @@ public final class RedisCache implements Cache {
             @Override
             public Object doWithRedis(Jedis jedis) {
                 jedis.hset(id.getBytes(), key.toString().getBytes(), SerializeUtil.serialize(value));
-                LoggerUtil.debug(getClass(), ">>>>cache put object key: " + key.toString().replace('\n',' ').trim());
+                LoggerUtil.debug(getClass(), ">>>>cache put object key: " + key.toString().replace('\n', ' ').trim());
                 return null;
             }
         });
@@ -93,7 +91,7 @@ public final class RedisCache implements Cache {
         return execute(new RedisCallback() {
             @Override
             public Object doWithRedis(Jedis jedis) {
-                LoggerUtil.debug(getClass(), ">>>>cache get object key: " + key.toString().replace('\n',' ').trim());
+                LoggerUtil.debug(getClass(), ">>>>cache get object key: " + key.toString().replace('\n', ' ').trim());
                 return SerializeUtil.unserialize(jedis.hget(id.getBytes(), key.toString().getBytes()));
             }
         });

@@ -20,7 +20,8 @@
             jQuery.post("/login",
                     {
                         userName: jQuery("#username").val(),
-                        password: jQuery("#password").val()
+                        password: jQuery("#password").val(),
+                        rememberMe: jQuery('#rememberMe').prop('checked')
                     },
                     function (data, status) {
                         if (data.error) {
@@ -64,7 +65,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"> Remember me
+                        <input id="rememberMe" type="checkbox"> Remember me
                     </label>
                 </div>
             </div>

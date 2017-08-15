@@ -1,6 +1,5 @@
 package io.github.geniusv.role.service.impl;
 
-import com.sun.xml.internal.ws.message.RootElementSniffer;
 import io.github.geniusv.dao.exception.RecordNoFoundException;
 import io.github.geniusv.dao.mapper.RoleMapper;
 import io.github.geniusv.dao.mapper.UserMapper;
@@ -9,11 +8,10 @@ import io.github.geniusv.dao.model.Role;
 import io.github.geniusv.dao.model.RoleExample;
 import io.github.geniusv.dao.model.UserRole;
 import io.github.geniusv.dao.model.UserRoleExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import io.github.geniusv.role.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

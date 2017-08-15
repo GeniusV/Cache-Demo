@@ -18,16 +18,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class RedisCache implements Cache {
 
 
-    public void setJedisConnectionFactory(JedisConnectionFactory jedisConnectionFactory) {
-        this.jedisConnectionFactory = jedisConnectionFactory;
-    }
-
-    private JedisConnectionFactory jedisConnectionFactory;
-
     private final String id;
-
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-
+    private JedisConnectionFactory jedisConnectionFactory;
 
     public RedisCache(final String id) {
         if (id == null) {
@@ -35,6 +28,10 @@ public class RedisCache implements Cache {
         }
         LoggerUtil.debug(getClass(), "MybatisRedisCache:id=" + id);
         this.id = id;
+    }
+
+    public void setJedisConnectionFactory(JedisConnectionFactory jedisConnectionFactory) {
+        this.jedisConnectionFactory = jedisConnectionFactory;
     }
 
     @Override

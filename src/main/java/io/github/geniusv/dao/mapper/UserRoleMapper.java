@@ -2,9 +2,10 @@ package io.github.geniusv.dao.mapper;
 
 import io.github.geniusv.dao.model.UserRole;
 import io.github.geniusv.dao.model.UserRoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserRoleMapper {
