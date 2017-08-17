@@ -22,4 +22,7 @@ public interface UserService {
     List<User> getAllUsersByPage(Long offset, Long num);
 
     Long getUserCount();
+
+    void deleteUser(List<Long> idList);
+
 }

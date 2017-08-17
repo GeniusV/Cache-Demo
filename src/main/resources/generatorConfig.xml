@@ -10,7 +10,7 @@
 
     <context id="mysqlgenerator" targetRuntime="MyBatis3">
 
-
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="dao.SelectPrimaryKeyByExamplePlugin"/>
 
@@ -19,19 +19,19 @@
                         userId="root"
                         password="123456" />
 
-        <javaModelGenerator targetPackage="io.github.geniusv.dao.model" targetProject="src/main/java" />
+        <!--<javaModelGenerator targetPackage="io.github.geniusv.dao.model" targetProject="src/main/java" />-->
 
-        <sqlMapGenerator targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/resources" />
+        <!--<sqlMapGenerator targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/resources" />-->
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/java" />
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/java" />-->
 
 
 
-        <!--<javaModelGenerator targetPackage="dao.model" targetProject="src/main/java" />-->
+        <javaModelGenerator targetPackage="dao.model" targetProject="src/main/java" />
 
-        <!--<sqlMapGenerator targetPackage="dao.mapper" targetProject="src/main/resources" />-->
+        <sqlMapGenerator targetPackage="dao.mapper" targetProject="src/main/resources" />
 
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="dao.mapper" targetProject="src/main/java" />-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="dao.mapper" targetProject="src/main/java" />
 
 
         <table tableName="v_user" domainObjectName="User"/>
