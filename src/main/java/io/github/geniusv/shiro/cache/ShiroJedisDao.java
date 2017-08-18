@@ -34,15 +34,6 @@ public class ShiroJedisDao {
     public void returnResource(Jedis jedis, boolean isBroken) {
         if (jedis == null)
             return;
-        /**
-         * @deprecated starting from Jedis 3.0 this method will not be exposed.
-         * Resource cleanup should be done using @see {@link redis.clients.jedis.Jedis#close()}
-        if (isBroken){
-        getJedisPool().returnBrokenResource(jedis);
-        }else{
-        getJedisPool().returnResource(jedis);
-        }
-         */
         jedis.close();
     }
 
