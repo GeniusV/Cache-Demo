@@ -37,6 +37,7 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 //      <select id="selectPrimaryKeyByExample" parameterType="dao.model.RoleExample" resultType="java.lang.Long">
         XmlElement select = new XmlElement("select");
+        select.addElement(new TextElement("<!-- WARNING - @mbg.generated -->"));
         select.addAttribute(new Attribute("id", "selectPrimaryKeyByExample"));
         select.addAttribute(new Attribute("resultType", introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString()));
         select.addAttribute(new Attribute("parameterType", introspectedTable.getExampleType()));
@@ -77,6 +78,7 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
 //         <cache type="org.mybatis.caches.redis.RedisCache" />
         XmlElement cacheElement = new XmlElement("cache");
         cacheElement.addAttribute(new Attribute("type", "org.mybatis.caches.redis.RedisCache"));
+        cacheElement.addElement(new TextElement("<!-- WARNING - @mbg.generated -->"));
 
 
 //        selectPrimaryKeyLimitedByExample
@@ -98,6 +100,9 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         // add selectPrimaryKeyByExample
         FullyQualifiedJavaType returnType = new FullyQualifiedJavaType("java.util.List<" + introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType() + ">");
         Method method = generateMethod("selectPrimaryKeyByExample", JavaVisibility.DEFAULT, returnType, new Parameter(new FullyQualifiedJavaType(introspectedTable.getExampleType()), "example"));
+        method.addJavaDocLine("/**");
+        method.addJavaDocLine("* @mbg.generated");
+        method.addJavaDocLine("*/");
         interfaze.addMethod(method);
 
 //        selectPrimaryKeyLimitedByExample
@@ -111,6 +116,9 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
         selectPrimaryKeyLimitedByExample.addParameter(offset);
         selectPrimaryKeyLimitedByExample.addParameter(num);
         selectPrimaryKeyLimitedByExample.addParameter(example);
+        selectPrimaryKeyLimitedByExample.addJavaDocLine("/**");
+        selectPrimaryKeyLimitedByExample.addJavaDocLine("* @mbg.generated");
+        selectPrimaryKeyLimitedByExample.addJavaDocLine("*/");
         interfaze.addMethod(selectPrimaryKeyLimitedByExample);
 
         //add @Repository
@@ -122,6 +130,7 @@ public class SelectPrimaryKeyByExamplePlugin extends PluginAdapter {
     public XmlElement generateSelectLimitedPrimaryKeyByExample(IntrospectedTable introspectedTable) {
 //          <select id="selectPrimaryKeyLimitedByExample" parameterType="map" resultType="java.lang.Long">
         XmlElement select = new XmlElement("select");
+        select.addElement(new TextElement("<!-- WARNING - @mbg.generated -->"));
         select.addAttribute(new Attribute("id", "selectPrimaryKeyLimitedByExample"));
         select.addAttribute(new Attribute("parameterType", "map"));
         select.addAttribute(new Attribute("resultType", introspectedTable.getPrimaryKeyColumns().get(0).getFullyQualifiedJavaType().toString()));

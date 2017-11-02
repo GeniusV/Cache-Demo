@@ -39,7 +39,6 @@
         <table tableName="v_role" domainObjectName="Role"/>
         <table tableName="v_user_role" domainObjectName="UserRole"/>
 
-
     </context>
 
 </generatorConfiguration>
