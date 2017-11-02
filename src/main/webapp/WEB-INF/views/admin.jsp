@@ -178,10 +178,19 @@
         </script>
     --%>
 
+    <%--jQuery--%>
     <%--todo remove before release, this is for auto hint of css--%>
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/animate.min.css" rel="stylesheet">
 
+    <%--Bootstrap Table --%>
+    <link href="${pageContext.request.contextPath}/css/bootstrap-table.css" rel="stylesheet"/>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-table.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-table-zh-CN.js"></script>
+
+    <%-- X-editable --%>
+    <link href="${pageContext.request.contextPath}/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="${pageContext.request.contextPath}/js/bootstrap-editable.min.js"></script>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -248,18 +257,87 @@
                 <a id="previous" href="#" style="float: right;"><span class="glyphicon glyphicon-chevron-left"
                                                                       style="color: rgb(50, 185, 234);"></span>Precious</a>
         --%>
+        <script>
+            $(document).ready(function () {
+                initTable();
+//                fillTableData();
+                $("p").editable();
+            });
 
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th width="4em"><input id="total" type="checkbox"></th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody id="content">
-            </tbody>
+            function initTable() {
+                $("#test-table").bootstrapTable({
+                    columns: [{
+                        checkbox: 'true'
+                    }, {
+                        title: 'id',
+                        field: 'id',
+                    }, {
+                        title: 'name',
+                        field: 'userName',
+                        class: 'username'
+                    }, {
+                        title: 'status',
+                        field: 'status'
+                    }],
+                    filter: true,
+                    onLoadSuccess: function () {
+                        $('.username').editable({
+                            type: "text",                //编辑框的类型。支持text|textarea|select|date|checklist等
+                            title: "用户名",              //编辑框的标题
+                            disabled: false,             //是否禁用编辑
+                            emptytext: "空文本",          //空值的默认文本
+                            mode: "inline",              //编辑框的模式：支持popup和inline两种模式，默认是popup
+                            validate: function (value) { //字段验证
+                                if (!$.trim(value)) {
+                                    return '不能为空';
+                                }
+                            }
+                        });
+                    }
+
+                });
+            }
+
+            function fillTableData() {
+                $.get('/admin/users', {'offset': 1, 'num': 20}, function (data) {
+                    $("#test-table").bootstrapTable('load', data);
+                    $("#test-table").bootstrapTable('hideLoading');
+                });
+            }
+
+            function get_param() {
+                var ret = {'offset': 1, 'num': 30};
+                return ret;
+            }
+
+            function add_totalPage(res) {
+                return {
+                    total: 34,
+                    rows: res
+                };
+            }
+
+        </script>
+        <p id="test">
+            sdfjlsdf
+        </p>
+
+        <table id="test-table"
+               data-search="true" data-show-refresh="true"
+               data-show-toggle="true" data-show-columns="true" data-show-export="true"
+               data-detail-view="false" data-minimum-count-columns="2" data-show-pagination-switch="true"
+               data-pagination="true"
+               data-id-field="id" data-page-size="100" data-show-footer="false" data-side-pagination="server"
+               data-method="get" data-checkbox="true" data-url="/admin/users" data-query-params="get_param"
+               data-response-handler="add_totalPage">
+            <%--
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+            --%>
+
         </table>
     </div>
 </div>
