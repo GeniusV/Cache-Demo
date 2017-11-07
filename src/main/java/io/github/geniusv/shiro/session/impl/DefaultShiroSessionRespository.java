@@ -7,6 +7,7 @@ import org.apache.shiro.session.Session;
 import org.mybatis.caches.redis.SerializeUtil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -69,7 +70,7 @@ public class DefaultShiroSessionRespository implements ShiroSessionRespository {
 
     @Override
     public Collection<Session> getAllSessions() {
-        Collection<Session> result = null;
+        Collection<Session> result = new ArrayList<>();
         try {
             Collection<byte[]> keys = jedisDao.getAllKeys("*".getBytes());
             for (byte[] item : keys) {
