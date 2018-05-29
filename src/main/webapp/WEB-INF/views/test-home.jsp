@@ -18,47 +18,47 @@
 <div class="container animated fadeIn">
 
     <h1>This is the test-home page</h1>
-    <div class="col-xs-12">
-        <h2>info test</h2>
+    <%--<div class="col-xs-12">--%>
+        <%--<h2>info test</h2>--%>
 
-        <span class="glyphicon glyphicon-remove" style="color: rgb(0, 255, 0); font-size: 1000%;"></span>
-        <script>
+        <%--<span class="glyphicon glyphicon-remove" style="color: rgb(0, 255, 0); font-size: 1000%;"></span>--%>
+        <%--<script>--%>
 
-            $(function () {
-                $(".input-group").popover({
-                    html: true,
-                    content: '<div class="alert alert-danger alert-dismissable fade in">' +
-                    '<button button type="button" class="close" data-dismiss="alert" aria-label="Close">×</button>' +
-                    '错误！请进行一些更改。' +
-                    '</div>',
-                    trigger:'focus'
-                });
-            });
-
-
-        </script>
-        <button type="button" class="btn btn-default" title="Popover title"
-                data-container="body" data-toggle="popover" data-placement="auto right"
-                data-content="左侧的 Popover 中的一些内容" data-trigger="hover">
-            左侧的 Popover
-        </button>
+            <%--$(function () {--%>
+                <%--$(".input-group").popover({--%>
+                    <%--html: true,--%>
+                    <%--content: '<div class="alert alert-danger alert-dismissable fade in">' +--%>
+                    <%--'<button button type="button" class="close" data-dismiss="alert" aria-label="Close">×</button>' +--%>
+                    <%--'错误！请进行一些更改。' +--%>
+                    <%--'</div>',--%>
+                    <%--trigger:'focus'--%>
+                <%--});--%>
+            <%--});--%>
 
 
-        <form class="bs-example bs-example-form" role="form">
-            <div class="input-group" >
-                <input type="text" class="form-control" placeholder="twitterhandle">
-            </div>
-            <br>
-            <div class="input-group">
-                <input type="text" class="form-control">
-            </div>
-            <br>
-            <div class="input-group">
-                <input type="text" class="form-control">
-            </div>
-        </form>
+        <%--</script>--%>
+        <%--<button type="button" class="btn btn-default" title="Popover title"--%>
+                <%--data-container="body" data-toggle="popover" data-placement="auto right"--%>
+                <%--data-content="左侧的 Popover 中的一些内容" data-trigger="hover">--%>
+            <%--左侧的 Popover--%>
+        <%--</button>--%>
 
-    </div>
+
+        <%--<form class="bs-example bs-example-form" role="form">--%>
+            <%--<div class="input-group" >--%>
+                <%--<input type="text" class="form-control" placeholder="twitterhandle">--%>
+            <%--</div>--%>
+            <%--<br>--%>
+            <%--<div class="input-group">--%>
+                <%--<input type="text" class="form-control">--%>
+            <%--</div>--%>
+            <%--<br>--%>
+            <%--<div class="input-group">--%>
+                <%--<input type="text" class="form-control">--%>
+            <%--</div>--%>
+        <%--</form>--%>
+
+    <%--</div>--%>
 
 </div>
 </body>
