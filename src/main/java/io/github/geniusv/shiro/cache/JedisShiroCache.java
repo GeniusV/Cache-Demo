@@ -1,5 +1,6 @@
 package io.github.geniusv.shiro.cache;
 
+import io.github.geniusv.jedis.JedisDao;
 import io.github.geniusv.util.LoggerUtil;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
@@ -13,9 +14,17 @@ import java.util.Set;
  */
 public class JedisShiroCache<k, v> implements Cache<k, v> {
 
-    private ShiroJedisDao dao;
+    private JedisDao dao;
 
-    public JedisShiroCache(ShiroJedisDao dao) {
+    public JedisDao getDao() {
+        return dao;
+    }
+
+    public void setDao(JedisDao dao) {
+        this.dao = dao;
+    }
+
+    public JedisShiroCache(JedisDao dao) {
         this.dao = dao;
     }
 

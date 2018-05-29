@@ -61,7 +61,7 @@
 
     <bean id="defaultShiroSessionRespository"
           class="io.github.geniusv.shiro.session.impl.DefaultShiroSessionRespository">
-        <property name="jedisDao" ref="jedisDao"/>
+        <property name="jedisDao" ref="sessionJedisDao"/>
     </bean>
     <!--session configuration start-->
 
@@ -74,7 +74,7 @@
 
     <!--shiro cache configuration, use shiro db0-->
     <bean id="jedisShiroCacheManager" class="io.github.geniusv.shiro.cache.JedisShiroCacheManager">
-        <property name="shiroJedisDao" ref="shiroJedisDao"/>
+        <property name="jedisDao" ref="shiroJedisDao"/>
     </bean>
 
 

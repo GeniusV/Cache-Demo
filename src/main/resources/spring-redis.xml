@@ -17,7 +17,7 @@
     </bean>
 
     <!--jedis dao for others now is the session management-->
-    <bean id="jedisDao" class="io.github.geniusv.jedis.JedisDao">
+    <bean id="sessionJedisDao" class="io.github.geniusv.jedis.JedisDao">
         <property name="jedisPool" ref="jedisPool"/>
         <property name="dbIndex" value="1"/>
     </bean>
@@ -42,9 +42,10 @@
         <!--<property name="maxInactiveIntervalInSeconds" value="1800"/>-->
     <!--</bean>-->
 
-    <!--jedisDao for shiro cache-->
-    <bean id="shiroJedisDao" class="io.github.geniusv.shiro.cache.ShiroJedisDao">
+    <!--jedisDao for shiro cache, using db0-->
+    <bean id="shiroJedisDao" class="io.github.geniusv.jedis.JedisDao">
         <property name="jedisPool" ref="jedisPool"/>
+        <property name="dbIndex" value="0"/>
     </bean>
 
 

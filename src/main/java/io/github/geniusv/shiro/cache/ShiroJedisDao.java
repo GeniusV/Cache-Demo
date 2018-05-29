@@ -8,6 +8,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 /**
  * Created by GeniusV on 8/7/17.
  */
+@Deprecated
 public class ShiroJedisDao {
     private JedisPool jedisPool;
 
