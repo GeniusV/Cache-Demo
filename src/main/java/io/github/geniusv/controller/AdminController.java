@@ -23,7 +23,7 @@ import java.util.List;
  * Created by GeniusV on 8/13/17.
  */
 @Controller
-public class AdminContorller {
+public class AdminController {
 
     @Autowired
     UserService userService;

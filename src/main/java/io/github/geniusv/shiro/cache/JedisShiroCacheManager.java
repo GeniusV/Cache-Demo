@@ -1,5 +1,6 @@
 package io.github.geniusv.shiro.cache;
 
+import io.github.geniusv.jedis.JedisDao;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
@@ -10,25 +11,25 @@ import org.apache.shiro.util.Destroyable;
  */
 public class JedisShiroCacheManager implements CacheManager, Destroyable {
 
-    private ShiroJedisDao shiroJedisDao;
+    private JedisDao jedisDao;
 
-    public ShiroJedisDao getShiroJedisDao() {
-        return shiroJedisDao;
+    public JedisDao getJedisDao() {
+        return jedisDao;
     }
 
-    public void setShiroJedisDao(ShiroJedisDao shiroJedisDao) {
-        this.shiroJedisDao = shiroJedisDao;
+    public void setJedisDao(JedisDao jedisDao) {
+        this.jedisDao = jedisDao;
     }
 
 
     @Override
     public <K, V> Cache<K, V> getCache(String s) throws CacheException {
-        return new JedisShiroCache<>(shiroJedisDao);
+        return new JedisShiroCache<>(jedisDao);
     }
 
     @Override
     public void destroy() throws Exception {
-        shiroJedisDao.flushdb();
+        jedisDao.flushdb();
     }
 
 }

@@ -8,6 +8,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 /**
  * Created by GeniusV on 8/7/17.
  */
+@Deprecated
 public class ShiroJedisDao {
     private JedisPool jedisPool;
 
@@ -61,7 +62,7 @@ public class ShiroJedisDao {
             jedis = getJedis();
 
             Long result = jedis.del(key);
-            LoggerUtil.debug(getClass(), "É¾³ýSession½á¹û£º%s", result);
+            LoggerUtil.debug(getClass(), "delete by key: ", result);
         } catch (Exception e) {
             isBroken = true;
             throw e;
