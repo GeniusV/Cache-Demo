@@ -61,7 +61,7 @@ public class ShiroJedisDao {
             jedis = getJedis();
 
             Long result = jedis.del(key);
-            LoggerUtil.debug(getClass(), "É¾³ýSession½á¹û£º%s", result);
+            LoggerUtil.debug(getClass(), "delete by key: ", result);
         } catch (Exception e) {
             isBroken = true;
             throw e;
