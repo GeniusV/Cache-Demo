@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="100"/>
+        <property name="minIdle" value="10"/>
+        <property name="testOnBorrow" value="true"/>
+    </bean>
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="2" value="6379" name="port" type="int"/>
+        <constructor-arg index="3" value="5000" name="timeout" type="int"/>
+        <constructor-arg index="1" value="127.0.0.1" name="host" type="java.lang.String"/>
+    </bean>
+
+    <!--jedis dao for others now is the session management-->
+    <bean id="sessionJedisDao" class="io.github.geniusv.jedis.JedisDao">
+        <property name="jedisPool" ref="jedisPool"/>
+        <property name="dbIndex" value="1"/>
+    </bean>
+
+
+    <!--This jedis factory is for session, which has a primary attribute.-->
+    <!--<bean id="jedisConnectionFactory" primary="true"-->
+          <!--class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
+        <!--<property name="hostName" value="127.0.0.1"/>-->
+        <!--<property name="port" value="6379"/>-->
+        <!--<property name="usePool" value="true"/>-->
+        <!--<property name="poolConfig" ref="jedisPoolConfig"/>-->
+        <!--<property name="database" value="1"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">-->
+        <!--<property name="connectionFactory" ref="jedisConnectionFactory"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="redisHttpSessionConfiguration"-->
+          <!--class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">-->
+        <!--<property name="maxInactiveIntervalInSeconds" value="1800"/>-->
+    <!--</bean>-->
+
+    <!--jedisDao for shiro cache, using db0-->
+    <bean id="shiroJedisDao" class="io.github.geniusv.jedis.JedisDao">
+        <property name="jedisPool" ref="jedisPool"/>
+        <property name="dbIndex" value="0"/>
+    </bean>
+
+
+</beans>

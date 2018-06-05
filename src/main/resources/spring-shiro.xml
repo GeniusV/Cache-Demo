@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/index"/>
+        <property name="unauthorizedUrl" value="/login"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /css/**=anon
+                /fonts/**=anon
+                /js/**=anon
+                /img/**=anon
+
+                /login=login
+            </value>
+        </property>
+        <property name="filters">
+            <util:map>
+                <entry key="login" value-ref="login"/>
+            </util:map>
+        </property>
+    </bean>
+
+    <!--shiro filters start-->
+
+    <bean id="login" class="io.github.geniusv.shiro.filter.LoginFilter"/>
+
+    <!--shio filters end-->
+
+    <!--shiro SecurityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="customRelam"/>
+        <property name="cacheManager" ref="jedisShiroCacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="cookieRememberMeManager"/>
+    </bean>
+
+    <!--use shiro to manage session, stores in redis db1. start-->
+    <!--session configuration start-->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionValidationInterval" value="18000000"/>
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionDAO" ref="customShiroSessionDao"/>
+        <property name="sessionListeners" ref="customSessionListener"/>
+    </bean>
+
+    <bean id="customSessionListener" class="io.github.geniusv.shiro.listener.CustomSessionListener">
+        <property name="shiroSessionRespository" ref="defaultShiroSessionRespository"/>
+    </bean>
+
+    <bean id="customShiroSessionDao" class="io.github.geniusv.shiro.session.CustomShiroSessionDao">
+        <property name="shiroSessionRespository" ref="defaultShiroSessionRespository"/>
+        <property name="sessionIdGenerator" ref="javaUuidSessionIdGenerator"/>
+    </bean>
+
+    <bean id="javaUuidSessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <bean id="defaultShiroSessionRespository"
+          class="io.github.geniusv.shiro.session.impl.DefaultShiroSessionRespository">
+        <property name="jedisDao" ref="sessionJedisDao"/>
+    </bean>
+    <!--session configuration start-->
+
+    <bean id="customRelam" class="io.github.geniusv.shiro.realm.CustomRelam">
+        <property name="cacheManager" ref="jedisShiroCacheManager"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="cachingEnabled" value="true"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+    </bean>
+
+    <!--shiro cache configuration, use shiro db0-->
+    <bean id="jedisShiroCacheManager" class="io.github.geniusv.shiro.cache.JedisShiroCacheManager">
+        <property name="jedisDao" ref="shiroJedisDao"/>
+    </bean>
+
+
+    <!--remember me cookie-->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="baidu"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="2592000"/>
+    </bean>
+    <bean id="cookieRememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('3AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+
+</beans>
