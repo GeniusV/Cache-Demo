@@ -24,8 +24,7 @@ public class MappersGenerateTest {
 
     @Before
     public void before() {
-        //¶ÁÈ¡mybatis²ÎÊý
-        configFile = new File("/Users/GeniusV/Documents/Java/IdeaProjects/Cache-Demo/src/main/resources/generatorConfig.xml");
+        configFile = new File("/Users/GeniusV/Documents/Java/IdeaProjects/collageProjects/Jcimas/src/main/resources/generatorConfig.xml");
 
 //        configFile = new File("/Users/zhangsiyuan/Documents/MybatisFun/Mybatis-Chapter9-GeneratorPlugin/src/main/resources/mybatisConfig.xml");
     }

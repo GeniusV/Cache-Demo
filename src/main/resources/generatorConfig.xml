@@ -15,7 +15,7 @@
         <plugin type="dao.SelectPrimaryKeyByExamplePlugin"/>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/Cache_Demo"
+                        connectionURL="jdbc:mysql://localhost:3306/jcimas"
                         userId="root"
                         password="123456" />
 
@@ -35,7 +35,6 @@
 
 
         <table tableName="v_user" domainObjectName="User"/>
-
         <table tableName="v_role" domainObjectName="Role"/>
         <table tableName="v_user_role" domainObjectName="UserRole"/>
 
