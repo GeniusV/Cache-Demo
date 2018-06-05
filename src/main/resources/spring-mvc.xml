@@ -25,6 +25,7 @@
     <!--AdminLet static resources-->
     <mvc:resources mapping="/bower_components/**" location="/bower_components/"/>
     <mvc:resources mapping="/dist/**" location="/dist/"/>
+    <mvc:resources mapping="/plugins/**" location="/plugins/"/>
 
     <!--view resolver-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
