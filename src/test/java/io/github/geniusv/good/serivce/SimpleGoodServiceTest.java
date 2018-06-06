@@ -1,7 +1,7 @@
-package dao.mapper;
+package io.github.geniusv.good.serivce;
 
-import dao.model.Good;
-import dao.model.GoodExample;
+import io.github.geniusv.dao.mapper.GoodMapper;
+import io.github.geniusv.dao.model.Good;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +10,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by GeniusV on 6/6/18.
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:test-spring-mybatis.xml")
-public class GoodMapperTest {
+@ContextConfiguration("classpath:spring.xml")
+public class SimpleGoodServiceTest {
 
     @Autowired
     GoodMapper goodMapper;
 
+    @Autowired
+    GoodService goodService;
+
     @Test
-    public void queryGoods() {
-        List<Good> result = goodMapper.selectByExample(new GoodExample());
+    public void query() {
+        List<Good> result = goodService.selectGood();
         for (Good good : result) {
             System.out.println(good.toString());
         }

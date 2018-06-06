@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,5 +34,12 @@ public class MainController {
     @ExceptionHandler(value = {UnauthenticatedException.class, UnauthorizedException.class})
     public String exceptionHandler(HttpServletRequest request) {
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/")
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("/index");
+
+        return modelAndView;
     }
 }
