@@ -11,45 +11,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <jsp:include page="header.jsp"/>
-    <aside class="main-sidebar">
-
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
-            <!--<div class="user-panel">-->
-            <!--<div class="pull-left image">-->
-            <!--&lt;!&ndash;<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">&ndash;&gt;-->
-            <!--</div>-->
-            <!--<div class="pull-left info">-->
-            <!--<p>Alexander Pierce</p>-->
-            <!--&lt;!&ndash; Status &ndash;&gt;-->
-            <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!-- search form (Optional) -->
-            <!--<form action="#" method="get" class="sidebar-form">-->
-            <!--<div class="input-group">-->
-            <!--<input type="text" name="q" class="form-control" placeholder="Search...">-->
-            <!--<span class="input-group-btn">-->
-            <!--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>-->
-            <!--</button>-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--</form>-->
-            <!-- /.search form -->
-
-            <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">Personal Center</li>
-                <li class="active"><a href="space.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
-                <li><a href="order.html"><i class="fa fa-reorder"></i> <span>全部订单</span></a></li>
-            </ul>
-            <!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    <jsp:include page="sidebar.jsp"/>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -93,15 +55,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
-    </footer>
+    <jsp:include page="footer.jsp"/>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
