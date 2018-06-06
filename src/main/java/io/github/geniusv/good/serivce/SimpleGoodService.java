@@ -26,7 +26,7 @@ public class SimpleGoodService implements GoodService {
 
     @Override
     public List<Good> selectGoodByPage(Long page) {
-        List<Long> idList = goodMapper.selectPrimaryKeyLimitedByExample(page , 15L, new GoodExample());
+        List<Long> idList = goodMapper.selectPrimaryKeyLimitedByExample(page * 15 , 15L, new GoodExample());
         List<Good> res = new ArrayList<>();
         for (Long id : idList) {
             res.add(goodMapper.selectByPrimaryKey(id));
