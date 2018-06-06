@@ -1,8 +1,11 @@
 package io.github.geniusv.controller;
 
+import io.github.geniusv.dao.model.Good;
+import io.github.geniusv.good.serivce.GoodService;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by GeniusV on 8/5/17.
@@ -17,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private GoodService goodService;
 
     @RequiresAuthentication
     @RequestMapping(value = "home", method = RequestMethod.GET)
@@ -39,6 +46,9 @@ public class MainController {
     @RequestMapping(value = "/")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("/index");
+        List<Good> goodList = goodService.selectGood();
+
+        modelAndView.addObject("goodList", goodList);
 
         return modelAndView;
     }
