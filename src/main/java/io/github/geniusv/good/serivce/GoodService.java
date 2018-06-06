@@ -12,4 +12,8 @@ import java.util.List;
 public interface GoodService {
 
     List<Good> selectGood();
+
+    List<Good> selectGoodByPage(Long page);
+
+    Long getPageNum();
 }

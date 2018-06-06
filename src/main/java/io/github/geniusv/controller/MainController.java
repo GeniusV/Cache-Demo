@@ -6,10 +6,12 @@ import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,12 +46,15 @@ public class MainController {
     }
 
     @RequestMapping(value = "/")
-    public ModelAndView index() {
+    public ModelAndView index(@RequestParam(value = "page", required = false) Long page) {
         ModelAndView modelAndView = new ModelAndView("/index");
         List<Good> goodList = goodService.selectGood();
 
         modelAndView.addObject("goodList", goodList);
+        modelAndView.addObject("totalPage", goodService.getPageNum());
+        modelAndView.addObject("currentPage", page);
 
         return modelAndView;
     }
+
 }

@@ -6,6 +6,7 @@ import io.github.geniusv.dao.model.GoodExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,26 @@ public class SimpleGoodService implements GoodService {
     @Override
     public List<Good> selectGood() {
         return goodMapper.selectByExample(new GoodExample());
+    }
+
+    @Override
+    public List<Good> selectGoodByPage(Long page) {
+        List<Long> idList = goodMapper.selectPrimaryKeyLimitedByExample(page , 15L, new GoodExample());
+        List<Good> res = new ArrayList<>();
+        for (Long id : idList) {
+            res.add(goodMapper.selectByPrimaryKey(id));
+        }
+        return res;
+    }
+
+    @Override
+    public Long getPageNum() {
+        Long ct = goodMapper.countByExample(new GoodExample());
+        Long page = ct / 15;
+        if (ct % 15 != 0) {
+            return page + 1;
+        }
+        return page;
     }
 
     public GoodMapper getGoodMapper() {

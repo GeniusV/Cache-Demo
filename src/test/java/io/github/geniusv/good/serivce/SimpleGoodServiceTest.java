@@ -2,6 +2,7 @@ package io.github.geniusv.good.serivce;
 
 import io.github.geniusv.dao.mapper.GoodMapper;
 import io.github.geniusv.dao.model.Good;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,22 @@ public class SimpleGoodServiceTest {
         for (Good good : result) {
             System.out.println(good.toString());
         }
+    }
+
+
+    @Test
+    public void queryInPage() {
+        List<Good> result = goodService.selectGoodByPage(0L);
+        for (Good good : result) {
+            System.out.println(good.toString());
+        }
+        Assert.assertEquals(15, result.size());
+    }
+
+    @Test
+    public void queryNum() {
+        Long result = goodService.getPageNum();
+
+        Assert.assertEquals(new Long(3), result);
     }
 }
