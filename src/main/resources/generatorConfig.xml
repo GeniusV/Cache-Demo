@@ -19,24 +19,26 @@
                         userId="root"
                         password="123456" />
 
-        <!--<javaModelGenerator targetPackage="io.github.geniusv.dao.model" targetProject="src/main/java" />-->
+        <javaModelGenerator targetPackage="io.github.geniusv.dao.model" targetProject="src/main/java" />
 
-        <!--<sqlMapGenerator targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/resources" />-->
+        <sqlMapGenerator targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/resources" />
 
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/java" />-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="io.github.geniusv.dao.mapper" targetProject="src/main/java" />
 
 
 
-        <javaModelGenerator targetPackage="dao.model" targetProject="src/main/java" />
+        <!--<javaModelGenerator targetPackage="dao.model" targetProject="src/main/java" />-->
 
-        <sqlMapGenerator targetPackage="dao.mapper" targetProject="src/main/resources" />
+        <!--<sqlMapGenerator targetPackage="dao.mapper" targetProject="src/main/resources" />-->
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="dao.mapper" targetProject="src/main/java" />
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="dao.mapper" targetProject="src/main/java" />-->
 
 
         <table tableName="v_user" domainObjectName="User"/>
         <table tableName="v_role" domainObjectName="Role"/>
         <table tableName="v_user_role" domainObjectName="UserRole"/>
+        <table tableName="v_good" domainObjectName="Good"/>
+        <table tableName="v_order" domainObjectName="Order"/>
 
     </context>
 
