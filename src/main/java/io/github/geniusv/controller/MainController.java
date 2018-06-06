@@ -48,11 +48,16 @@ public class MainController {
     @RequestMapping(value = "/")
     public ModelAndView index(@RequestParam(value = "page", required = false) Long page) {
         ModelAndView modelAndView = new ModelAndView("/index");
-        List<Good> goodList = goodService.selectGood();
+        if (page == null) {
+            page = 0L;
+        } else {
+            page--;
+        }
+        List<Good> goodList = goodService.selectGoodByPage(page);
 
         modelAndView.addObject("goodList", goodList);
         modelAndView.addObject("totalPage", goodService.getPageNum());
-        modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("currentPage", page + 1);
 
         return modelAndView;
     }
