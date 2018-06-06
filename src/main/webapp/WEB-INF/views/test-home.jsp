@@ -1,65 +1,192 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: GeniusV
-  Date: 8/5/17
-  Time: 5:19 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page language="java" pageEncoding="UTF-8" %>
+<!doctype html>
+<html lang="ch">
 <head>
+    <meta charset="UTF-8">
 
-    <title>test-home</title>
+    <title>Home</title>
+
     <jsp:include page="common-resouces.jsp"/>
-
 </head>
-<body>
-<jsp:include page="header.jsp"/>
-<div class="container animated fadeIn">
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <jsp:include page="header.jsp"/>
+    <aside class="main-sidebar">
 
-    <h1>This is the test-home page</h1>
-    <%--<div class="col-xs-12">--%>
-        <%--<h2>info test</h2>--%>
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
 
-        <%--<span class="glyphicon glyphicon-remove" style="color: rgb(0, 255, 0); font-size: 1000%;"></span>--%>
-        <%--<script>--%>
+            <!-- Sidebar user panel (optional) -->
+            <!--<div class="user-panel">-->
+            <!--<div class="pull-left image">-->
+            <!--&lt;!&ndash;<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="pull-left info">-->
+            <!--<p>Alexander Pierce</p>-->
+            <!--&lt;!&ndash; Status &ndash;&gt;-->
+            <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
+            <!--</div>-->
+            <!--</div>-->
 
-            <%--$(function () {--%>
-                <%--$(".input-group").popover({--%>
-                    <%--html: true,--%>
-                    <%--content: '<div class="alert alert-danger alert-dismissable fade in">' +--%>
-                    <%--'<button button type="button" class="close" data-dismiss="alert" aria-label="Close">×</button>' +--%>
-                    <%--'错误！请进行一些更改。' +--%>
-                    <%--'</div>',--%>
-                    <%--trigger:'focus'--%>
-                <%--});--%>
-            <%--});--%>
+            <!-- search form (Optional) -->
+            <!--<form action="#" method="get" class="sidebar-form">-->
+            <!--<div class="input-group">-->
+            <!--<input type="text" name="q" class="form-control" placeholder="Search...">-->
+            <!--<span class="input-group-btn">-->
+            <!--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>-->
+            <!--</button>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</form>-->
+            <!-- /.search form -->
 
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Personal Center</li>
+                <li class="active"><a href="space.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li><a href="order.html"><i class="fa fa-reorder"></i> <span>全部订单</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
-        <%--</script>--%>
-        <%--<button type="button" class="btn btn-default" title="Popover title"--%>
-                <%--data-container="body" data-toggle="popover" data-placement="auto right"--%>
-                <%--data-content="左侧的 Popover 中的一些内容" data-trigger="hover">--%>
-            <%--左侧的 Popover--%>
-        <%--</button>--%>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!--<section class="content-header">-->
+        <!--&lt;!&ndash;<h1>&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<small>Optional description</small>&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</h1>&ndash;&gt;-->
+        <!--<ol class="breadcrumb">-->
+        <!--<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>-->
+        <!--<li class="active">Here</li>-->
+        <!--</ol>-->
+        <!--</section>-->
 
+        <!-- Main content -->
+        <section class="content container-fluid">
 
-        <%--<form class="bs-example bs-example-form" role="form">--%>
-            <%--<div class="input-group" >--%>
-                <%--<input type="text" class="form-control" placeholder="twitterhandle">--%>
-            <%--</div>--%>
-            <%--<br>--%>
-            <%--<div class="input-group">--%>
-                <%--<input type="text" class="form-control">--%>
-            <%--</div>--%>
-            <%--<br>--%>
-            <%--<div class="input-group">--%>
-                <%--<input type="text" class="form-control">--%>
-            <%--</div>--%>
-        <%--</form>--%>
+            <div class="col-md-6 col-md-offset-3" style="margin-top: 10%">
+                <div class="box box-primary">
+                    <div class="box-body box-profile" style="padding-left: 30px; padding-right: 30px">
+                        <h3 class="profile-username text-center">User Name</h3>
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Email</b> <a class="pull-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Gender</b> <a class="pull-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Tel</b> <a class="pull-right">13,287</a>
+                            </li>
+                        </ul>
 
-    <%--</div>--%>
+                        <a href="changeProfile.html" class="btn btn-primary center-block"><b>Change</b></a>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            Anything you want
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane active" id="control-sidebar-home-tab">
+                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                                <p>Will be 23 on April 24th</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <h4 class="control-sidebar-subheading">
+                                Custom Template Design
+                                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+                            </h4>
+
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+            </div>
+            <!-- /.tab-pane -->
+            <!-- Stats tab content -->
+            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+                <form method="post">
+                    <h3 class="control-sidebar-heading">General Settings</h3>
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Report panel usage
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+
+                        <p>
+                            Some information about this general settings option
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+
 
 </div>
 </body>
+<jsp:include page="footer-js.jsp"/>
+<script>
+    $.get("/user/subject", function (result) {
+        $("#user").text(result.subject);
+    });
+</script>
 </html>

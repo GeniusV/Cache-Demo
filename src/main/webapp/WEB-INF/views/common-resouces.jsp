@@ -9,9 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
+<%--<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>--%>
+<%--<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>--%>
+
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
 <link href="${pageContext.request.contextPath}/css/animate.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css">

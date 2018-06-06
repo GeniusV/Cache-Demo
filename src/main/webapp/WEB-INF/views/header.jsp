@@ -278,14 +278,3 @@
     </nav>
 </header>
 
-<script>
-
-    jQuery.get("/user/subject", function (result) {
-        if (Object.keys(result).length !== 0) {
-            jQuery("#dropdown-username").text(result.userName);
-            $("#navbar-with-user").removeAttr("hidden");
-        }else {
-            $("#navbar-without-user").removeAttr("hidden");
-        }
-    });
-</script>
