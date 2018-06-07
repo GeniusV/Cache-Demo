@@ -55,6 +55,7 @@ public class SimpleOrderService implements OrderService {
     @Override
     public List<Order> selectUserOrder(Long userId, Long page) {
         OrderExample orderExample = new OrderExample();
+        orderExample.setOrderByClause("id desc");
         orderExample.or().andUserIdEqualTo(userId);
         List<Long> idList = orderMapper.selectPrimaryKeyLimitedByExample(page * 10, 10L, orderExample);
         List<Order> result = new ArrayList<>();

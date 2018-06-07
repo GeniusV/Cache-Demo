@@ -142,5 +142,7 @@
     $.get("/user/subject", function (result) {
         $("#user").text(result.subject);
     });
+
+    $("#tab-main").addClass("active");
 </script>
 </html>

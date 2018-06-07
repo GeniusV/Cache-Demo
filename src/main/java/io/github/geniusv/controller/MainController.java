@@ -9,19 +9,16 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by GeniusV on 8/5/17.
@@ -111,6 +108,16 @@ public class MainController {
         modelAndView.addObject("currentPage", page + 1);
 
         return modelAndView;
+    }
+
+    @RequiresAuthentication
+    @ResponseBody
+    @RequestMapping(value = "/buy/{id}")
+    public Map<String, Boolean> buy(@PathVariable Long id) {
+        Map<String, Boolean> result = new HashMap<>();
+        Long userId = (Long) SecurityUtils.getSubject().getPrincipal();
+        result.put("success", orderService.createOrder(userId, id));
+        return result;
     }
 
 }

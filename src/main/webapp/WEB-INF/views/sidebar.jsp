@@ -13,8 +13,8 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Personal Center</li>
-            <li class="active"><a href="/home"><i class="fa fa-home"></i> <span>首页</span></a></li>
-            <li><a href="/order"><i class="fa fa-reorder"></i> <span>全部订单</span></a></li>
+            <li id="tab-main"><a href="/home"><i class="fa fa-home"></i> <span>首页</span></a></li>
+            <li id="tab-order"><a href="/order"><i class="fa fa-reorder"></i> <span>全部订单</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

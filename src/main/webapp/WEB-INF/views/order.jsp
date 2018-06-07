@@ -330,6 +330,8 @@
         currentNum: ${currentPage},
         beforeFun: beforeFun
     });
+
+    $("#tab-order").addClass("active");
 </script>
 
 </html>
