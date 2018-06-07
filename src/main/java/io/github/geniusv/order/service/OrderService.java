@@ -11,4 +11,7 @@ public interface OrderService {
     boolean createOrder(Long userId, Long goodId);
 
     List<Order> selectUserOrder(Long userId, Long page);
+
+    Long getPageNum(Long userId);
+
 }

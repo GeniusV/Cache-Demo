@@ -44,6 +44,11 @@ public class SimpleGoodService implements GoodService {
         return page;
     }
 
+    @Override
+    public Good selectGood(Long id) {
+        return goodMapper.selectByPrimaryKey(id);
+    }
+
     public GoodMapper getGoodMapper() {
         return goodMapper;
     }

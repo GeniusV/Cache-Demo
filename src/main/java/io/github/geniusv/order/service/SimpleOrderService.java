@@ -3,8 +3,10 @@ package io.github.geniusv.order.service;
 import io.github.geniusv.dao.mapper.GoodMapper;
 import io.github.geniusv.dao.mapper.OrderMapper;
 import io.github.geniusv.dao.mapper.UserMapper;
+import io.github.geniusv.dao.model.GoodExample;
 import io.github.geniusv.dao.model.Order;
 import io.github.geniusv.dao.model.OrderExample;
+import io.github.geniusv.good.serivce.GoodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,18 @@ public class SimpleOrderService implements OrderService {
         }
         return result;
     }
+
+    @Override
+    public Long getPageNum(Long userId) {
+        OrderExample orderExample = new OrderExample();
+        orderExample.or().andUserIdEqualTo(userId);
+        Long ct = orderMapper.countByExample(orderExample);
+        Long page = ct / 10;
+        if (ct % 10 != 0) {
+            return page + 1;
+        }
+        return page;    }
+
 
 
     public UserMapper getUserMapper() {
