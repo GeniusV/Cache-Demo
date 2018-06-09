@@ -35,13 +35,13 @@
                         <h3 class="profile-username text-center">User Name</h3>
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b>Email</b> <a class="pull-right">1,322</a>
+                                <b>Email</b> <a class="pull-right">${user.email}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Gender</b> <a class="pull-right">543</a>
+                                <b>Gender</b> <a class="pull-right">${user.gender}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Tel</b> <a class="pull-right">13,287</a>
+                                <b>Tel</b> <a class="pull-right">${user.tel}</a>
                             </li>
                         </ul>
 

@@ -2,9 +2,11 @@ package io.github.geniusv.controller;
 
 import io.github.geniusv.dao.model.Good;
 import io.github.geniusv.dao.model.Order;
+import io.github.geniusv.dao.model.User;
 import io.github.geniusv.good.serivce.GoodService;
 import io.github.geniusv.order.service.OrderDetailWrapper;
 import io.github.geniusv.order.service.OrderService;
+import io.github.geniusv.user.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -33,6 +35,9 @@ public class MainController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private UserService userService;
+
     public GoodService getGoodService() {
         return goodService;
     }
@@ -49,10 +54,23 @@ public class MainController {
         this.orderService = orderService;
     }
 
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     @RequiresAuthentication
     @RequestMapping(value = "home", method = RequestMethod.GET)
-    public String getHome() {
-        return "/test-home";
+    public ModelAndView getHome() {
+        ModelAndView modelAndView = new ModelAndView("/test-home");
+        Long userId = (Long) SecurityUtils.getSubject().getPrincipal();
+        User user = userService.getUserById(userId);
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
     }
 
     @RequiresAuthentication
