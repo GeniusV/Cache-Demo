@@ -32,7 +32,7 @@
             <div class="col-md-6 col-md-offset-3" style="margin-top: 10%">
                 <div class="box box-primary">
                     <div class="box-body box-profile" style="padding-left: 30px; padding-right: 30px">
-                        <h3 class="profile-username text-center">User Name</h3>
+                        <h3 class="profile-username text-center">${user.userName}</h3>
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
                                 <b>Email</b> <a class="pull-right">${user.email}</a>
@@ -45,7 +45,7 @@
                             </li>
                         </ul>
 
-                        <a href="changeProfile.html" class="btn btn-primary center-block"><b>Change</b></a>
+                        <a href="/user/update" class="btn btn-primary center-block"><b>Change</b></a>
                     </div>
                     <!-- /.box-body -->
                 </div>

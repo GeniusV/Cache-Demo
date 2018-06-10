@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -109,5 +111,34 @@ public class UserController {
         result.put("info", "Delete user success");
         return result;
     }
+
+    @RequiresAuthentication
+    @RequestMapping(value = "user/update", method = RequestMethod.GET)
+    public ModelAndView getUserInfoPage() {
+        ModelAndView modelAndView = new ModelAndView("changeInfo");
+        Long userId = (Long) SecurityUtils.getSubject().getPrincipal();
+        modelAndView.addObject("user", userService.getUserById(userId));
+
+        return modelAndView;
+    }
+
+    @RequiresAuthentication
+    @RequestMapping(value = "user/update", method = RequestMethod.POST)
+    public String updateUserInfo(@Param("email") String email, @Param("password") String password, @Param("tel") String tel, @Param("gender") String gender) {
+        User user = new User();
+        user.setId((Long) SecurityUtils.getSubject().getPrincipal());
+        user.setEmail(email);
+        user.setTel(tel);
+        user.setGender(gender);
+
+        if (password != null && !"".equals(password)) {
+            user.setPassword(password);
+        }
+        userService.updateUserInfo(user);
+
+        return "redirect:/home";
+    }
+
+
 
 }
