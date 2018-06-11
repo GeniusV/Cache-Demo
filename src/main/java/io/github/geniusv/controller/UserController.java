@@ -57,6 +57,37 @@ public class UserController {
         return data;
     }
 
+
+//    @RequiresGuest
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(){
+        return "user/register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> register(@ModelAttribute("userName") String userName, @ModelAttribute("password") String password) {
+
+        Map<String, Object> data = new HashMap<String, Object>();
+
+        if (userService.selectByUserName("username") != null) {
+            data.put("error", "User name or password already exists.");
+        } else {
+            User user = new User();
+            user.setUserName(userName);
+            user.setPassword(password);
+            user.setGender("other");
+            user.setTel("");
+            user.setEmail("");
+            user.setStatus(1L);
+            userService.addUser(user);
+        }
+
+        data.put("redirect", "/login");
+
+        return data;
+    }
+
     @RequestMapping(value = "user/subject", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> getCurrentUser() {
