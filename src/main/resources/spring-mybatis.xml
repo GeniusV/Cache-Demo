@@ -14,6 +14,8 @@
     <context:component-scan base-package="io.github.geniusv.dao"/>
     <context:component-scan base-package="io.github.geniusv.user"/>
     <context:component-scan base-package="io.github.geniusv.role"/>
+    <context:component-scan base-package="io.github.geniusv.good"/>
+    <context:component-scan base-package="io.github.geniusv.order"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
