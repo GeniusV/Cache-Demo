@@ -40,7 +40,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" value="${user.email}">
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="example@example.com" value="${user.email}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="tel">Telephone</label>
-                                <input type="text" name="tel" class="form-control" id="tel" placeholder="Password" value="${user.tel}">
+                                <input type="text" name="tel" class="form-control" id="tel" placeholder="Telphne" value="${user.tel}">
                             </div>
                             <div class="form-group" >
                                 <label>Gender</label>
