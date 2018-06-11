@@ -70,7 +70,7 @@ public class UserController {
 
         Map<String, Object> data = new HashMap<String, Object>();
 
-        if (userService.selectByUserName("username") != null) {
+        if (userService.selectByUserName(userName) != null) {
             data.put("error", "User name or password already exists.");
         } else {
             User user = new User();
