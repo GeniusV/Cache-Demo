@@ -187,7 +187,7 @@
     <div id="warning"></div>
 
     <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a href="../../index2.html"><b>Jcimas</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
