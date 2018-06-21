@@ -1,6 +1,6 @@
 .idea/
 target/
-
+*.rdb
 ### Java template
 # Compiled class file
 *.class
