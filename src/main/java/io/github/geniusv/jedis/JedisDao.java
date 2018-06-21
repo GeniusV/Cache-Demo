@@ -45,7 +45,7 @@ public class JedisDao {
         return jedis;
     }
 
-    public void returnResource(Jedis jedis, boolean isBroken) {
+    public void returnResource(Jedis jedis) {
         if (jedis == null)
             return;
         jedis.close();
@@ -62,7 +62,7 @@ public class JedisDao {
             isBroken = true;
             throw e;
         } finally {
-            returnResource(jedis, isBroken);
+            returnResource(jedis);
         }
         return result;
     }
@@ -77,7 +77,7 @@ public class JedisDao {
             isBroken = true;
             throw e;
         } finally {
-            returnResource(jedis, isBroken);
+            returnResource(jedis);
         }
     }
 
@@ -94,7 +94,7 @@ public class JedisDao {
             isBroken = true;
             throw e;
         } finally {
-            returnResource(jedis, isBroken);
+            returnResource(jedis);
         }
     }
 
@@ -108,7 +108,7 @@ public class JedisDao {
             isBroken = true;
             throw e;
         } finally {
-            returnResource(jedis, isBroken);
+            returnResource(jedis);
         }
     }
 
@@ -123,7 +123,7 @@ public class JedisDao {
             isBroken = true;
             throw e;
         } finally {
-            returnResource(jedis, isBroken);
+            returnResource(jedis);
         }
         return result;
     }
