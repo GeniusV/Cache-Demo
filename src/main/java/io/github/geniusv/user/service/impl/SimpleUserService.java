@@ -74,6 +74,11 @@ public class SimpleUserService implements UserService {
         example.or().andIdIn(idList);
         userMapper.deleteByExample(example);
     }
+
+    @Override
+    public void updateUserInfo(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
 }
 
 
